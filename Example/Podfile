@@ -1,0 +1,11 @@
+use_frameworks!
+
+target 'LGBDate_Example' do
+  pod 'LGBDate', :path => '../'
+
+  target 'LGBDate_Tests' do
+    inherit! :search_paths
+
+    
+  end
+end
