@@ -498,4 +498,21 @@ static const unsigned componentFlags = (NSYearCalendarUnit| NSMonthCalendarUnit 
 	NSDateComponents *components = [[NSDate currentCalendar] components:componentFlags fromDate:self];
 	return components.year;
 }
+
+#pragma mark - Convert to time zones
+
+- (NSDate*)toLocalTime
+{
+    NSTimeZone* tz    = [NSTimeZone localTimeZone];
+    NSInteger seconds = [tz secondsFromGMTForDate:self];
+    return [NSDate dateWithTimeInterval:seconds sinceDate:self];
+}
+
+- (NSDate*)toGlobalTime
+{
+    NSTimeZone* tz    = [NSTimeZone localTimeZone];
+    NSInteger seconds = -[tz secondsFromGMTForDate:self];
+    return [NSDate dateWithTimeInterval:seconds sinceDate:self];
+}
+
 @end
